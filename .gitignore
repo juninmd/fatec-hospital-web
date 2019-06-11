@@ -104,4 +104,7 @@ typings/
 .dynamodb/
 
 # End of https://www.gitignore.io/api/linux,node
+<<<<<<< HEAD
 node_modules
+=======
+>>>>>>> d4fe0b11b07c915ffe5c820cf90040ee0230d8fb

@@ -1,5 +1,5 @@
 import { action, observable } from 'mobx';
-import { getPoemas } from '../../api/poemas.api';
+import { getPoemas } from '../../api/hospitais.api';
 
 export default class HomeStore {
   @observable records: any[] = [];

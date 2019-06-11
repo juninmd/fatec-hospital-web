@@ -1,5 +1,5 @@
 import { action, observable } from 'mobx';
-import { getPoemasById, postPoemas, putPoemas } from '../../api/poemas.api';
+import { getPoemasById, postPoemas, putPoemas } from '../../api/hospitais.api';
 import { getUser } from '../../util/auth.util';
 
 export default class PoemaStore {

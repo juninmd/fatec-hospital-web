@@ -1,5 +1,5 @@
 import { action, observable } from 'mobx';
-import { getUsuariosById, postUsuarios, putUsuarios } from '../../api/usuarios.api';
+import { getUsuariosById, postUsuarios, putUsuarios } from '../../api/especialidades.api';
 
 export default class UsuarioStore {
   @observable records: {
