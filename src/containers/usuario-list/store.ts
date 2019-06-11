@@ -1,5 +1,5 @@
 import { action, observable } from 'mobx';
-import { getUsuarios, deleteUsuarios } from '../../api/usuarios.api';
+import { getUsuarios, deleteUsuarios } from '../../api/especialidades.api';
 
 export default class UsuarioListStore {
   @observable records: any[] = [];
