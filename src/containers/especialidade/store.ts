@@ -1,8 +1,8 @@
 import { action, observable } from 'mobx';
-import { getPoemasById, postPoemas, putPoemas } from '../../api/hospitais.api';
+import { getEspecialidadesById, postEspecialidades, putEspecialidades } from '../../api/hospitais.api';
 import { getUser } from '../../util/auth.util';
 
-export default class PoemaStore {
+export default class EspecialidadeStore {
   @observable records: {
     codigo: string,
     titulo: string,
@@ -16,7 +16,7 @@ export default class PoemaStore {
     };
 
   @action buildRecords = async (id: number) => {
-    const { data: [records] } = await getPoemasById(id);
+    const { data: [records] } = await getEspecialidadesById(id);
     this.records = records;
   }
 
@@ -37,14 +37,14 @@ export default class PoemaStore {
   @action handleSubmit = async () => {
 
     if (Number(this.records.codigo)) {
-      await putPoemas(+this.records.codigo, this.records);
+      await putEspecialidades(+this.records.codigo, this.records);
     }
     else {
-      await postPoemas(this.records);
+      await postEspecialidades(this.records);
     }
     await this.reset();
   }
 
 }
-const poema = new PoemaStore();
-export { poema };
+const especialidade = new EspecialidadeStore();
+export { especialidade };

@@ -3,32 +3,32 @@ import MenuStore from '../../components/main-menu/store';
 import { Container, Grid, Header, Button, Segment, Form, Input } from 'semantic-ui-react';
 import { inject, observer } from 'mobx-react';
 import NewRouterStore from '../../mobx/router.store';
-import PoemaStore from './store';
-import { RouteComponentProps } from 'react-router';
+import UsuarioStore from './store';
+import { RouteComponentProps } from 'react-router-dom';
 
 interface Props {
   menu: MenuStore;
   router: NewRouterStore;
-  poema: PoemaStore;
+  usuario: UsuarioStore;
 }
-@inject('mainMenu', 'router', 'poema', 'match')
+@inject('mainMenu', 'router', 'usuario', 'match')
 @observer
-export default class Poema extends React.Component<RouteComponentProps<{ id: string }> & Props> {
+export default class Usuario extends React.Component<RouteComponentProps<{ id: string }> & Props> {
 
   list = () => {
     const { setHistory } = this.props.router;
-    setHistory(`poema-list`);
+    setHistory(`usuario-list`);
   };
 
   handleSubmit = async (e: any) => {
     e.preventDefault();
-    const { handleSubmit } = this.props.poema;
+    const { handleSubmit } = this.props.usuario;
     await handleSubmit();
     this.list();
   }
 
   async componentDidMount() {
-    const { buildRecords, reset } = this.props.poema;
+    const { buildRecords, reset } = this.props.usuario;
 
     const id = Number(this.props.match.params.id);
     if (id) {
@@ -41,8 +41,8 @@ export default class Poema extends React.Component<RouteComponentProps<{ id: str
 
   render() {
 
-    const { titulo, corpo } = this.props.poema.records;
-    const { handleForm } = this.props.poema;
+    const { email, nome, senha } = this.props.usuario.records;
+    const { handleForm } = this.props.usuario;
 
     return (
       <Container>
@@ -51,7 +51,7 @@ export default class Poema extends React.Component<RouteComponentProps<{ id: str
             <Grid.Column>
               <Header color='blue' as='h2'>
                 <Header.Content>
-                  Cadastro de Poemas
+                  Cadastro de usuarios
                  <Header.Subheader>Cadastre / Edite</Header.Subheader>
                 </Header.Content>
               </Header>
@@ -59,17 +59,23 @@ export default class Poema extends React.Component<RouteComponentProps<{ id: str
           </Grid.Row>
         </Grid>
 
-
         <Segment>
           <Form onSubmit={this.handleSubmit}>
             <Form.Field required={true}>
-              <label>Titulo:</label>
-              <Input type='text' id='titulo' required={true} value={titulo} onChange={handleForm} />
+              <label>E-mail:</label>
+              <Input type='text' id='email' required={true} value={email} onChange={handleForm} />
             </Form.Field>
+
             <Form.Field required={true}>
-              <label>Corpo:</label>
-              <textarea value={corpo} id='corpo' required={true} onChange={handleForm} ></textarea>
+              <label>Nome:</label>
+              <Input type='text' id='nome' required={true} value={nome} onChange={handleForm} />
             </Form.Field>
+
+            <Form.Field required={true}>
+              <label>Senha:</label>
+              <Input type='password' id='senha' required={true} value={senha} onChange={handleForm} />
+            </Form.Field>
+
             <Button positive={true} type='submit'>Enviar</Button>
             <Button negative={true} onClick={() => this.list()} type='button'>Voltar</Button>
           </Form>

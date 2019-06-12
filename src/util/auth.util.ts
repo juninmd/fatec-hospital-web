@@ -2,7 +2,6 @@ import swal from 'sweetalert2';
 
 export const isLoggedIn = () => {
   const user = sessionStorage.getItem('auth_token');
-  console.log(user);
   return user !== null;
 };
 

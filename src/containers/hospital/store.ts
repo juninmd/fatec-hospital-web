@@ -1,7 +1,7 @@
 import { action, observable } from 'mobx';
-import { getUsuariosById, postUsuarios, putUsuarios } from '../../api/especialidades.api';
+import { getHospitaisById, postHospitais, putHospitais } from '../../api/especialidades.api';
 
-export default class UsuarioStore {
+export default class Hospitaistore {
   @observable records: {
     codigo: string,
     email: string,
@@ -15,7 +15,7 @@ export default class UsuarioStore {
     };
 
   @action buildRecords = async (id: number) => {
-    const { data: [records] } = await getUsuariosById(id);
+    const { data: [records] } = await getHospitaisById(id);
     this.records = records;
   }
 
@@ -36,14 +36,14 @@ export default class UsuarioStore {
   @action handleSubmit = async () => {
 
     if (Number(this.records.codigo)) {
-      await putUsuarios(+this.records.codigo, this.records);
+      await putHospitais(+this.records.codigo, this.records);
     }
     else {
-      await postUsuarios(this.records);
+      await postHospitais(this.records);
     }
     await this.reset();
   }
 
 }
-const usuario = new UsuarioStore();
-export { usuario };
+const hospital = new HospitalStore();
+export { hospital };

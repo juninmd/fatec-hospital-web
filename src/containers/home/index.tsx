@@ -46,14 +46,14 @@ export default class Home extends React.Component<Props> {
           </Grid.Row>
         </Grid>
         <Card.Group itemsPerRow={2}>
-          {records.map((e) => {
+          {records.map((e, key) => {
             return (
-              <Card>
+              <Card key={key}>
                 <Card.Content>
                   <Card.Meta>{e.titulo}</Card.Meta>
                   <Card.Description>{e.corpo}</Card.Description>
                 </Card.Content>
-              </Card>)
+              </Card>);
           })}
         </Card.Group>
       </Container>

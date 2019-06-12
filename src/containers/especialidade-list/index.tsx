@@ -3,29 +3,28 @@ import MenuStore from '../../components/main-menu/store';
 import { Container, Grid, Header, Table, Button, Icon } from 'semantic-ui-react';
 import { inject, observer } from 'mobx-react';
 import NewRouterStore from '../../mobx/router.store';
-import UsuarioListStore from './store';
+import PoemaListStore from './store';
 
-@inject('mainMenu', 'router', 'usuarioList')
+@inject('mainMenu', 'router', 'poemaList')
 @observer
-export default class UsuarioList extends React.Component<{
+export default class PoemaList extends React.Component<{
   menu: MenuStore;
   router: NewRouterStore;
-  usuarioList: UsuarioListStore;
+  poemaList: PoemaListStore;
 }> {
   update = (id: number) => {
     const { setHistory } = this.props.router;
-    setHistory(`usuario/${id}`);
+    setHistory(`poema/${id}`);
   };
 
-
   async componentDidMount() {
-    const { buildRecords } = this.props.usuarioList;
+    const { buildRecords } = this.props.poemaList;
     await buildRecords();
   }
 
   render() {
 
-    const { records, remove } = this.props.usuarioList;
+    const { records, remove } = this.props.poemaList;
 
     return (
       <Container>
@@ -34,7 +33,7 @@ export default class UsuarioList extends React.Component<{
             <Grid.Column>
               <Header color='blue' as='h2'>
                 <Header.Content>
-                  Cadastro de usuarios
+                  Cadastro de Poemas
                  <Header.Subheader>Cadastre / Edite</Header.Subheader>
                 </Header.Content>
               </Header>
@@ -46,13 +45,11 @@ export default class UsuarioList extends React.Component<{
           </Grid.Row>
         </Grid>
 
-
-        <Table celled>
+        <Table celled={true}>
           <Table.Header>
             <Table.Row>
               <Table.HeaderCell width='1'>Id</Table.HeaderCell>
-              <Table.HeaderCell>E-mail</Table.HeaderCell>
-              <Table.HeaderCell>Nome</Table.HeaderCell>
+              <Table.HeaderCell>Título</Table.HeaderCell>
               <Table.HeaderCell width='1'>Ações</Table.HeaderCell>
             </Table.Row>
           </Table.Header>
@@ -61,8 +58,7 @@ export default class UsuarioList extends React.Component<{
             {records.map((e, index) => {
               return (<Table.Row key={index}>
                 <Table.Cell>{e.codigo}</Table.Cell>
-                <Table.Cell>{e.email}</Table.Cell>
-                <Table.Cell>{e.nome}</Table.Cell>
+                <Table.Cell>{e.titulo}</Table.Cell>
                 <Table.Cell>
                   <Button.Group>
                     <Button onClick={() => { this.update(e.codigo); }} icon={true} primary={true} size='small'>
@@ -73,7 +69,7 @@ export default class UsuarioList extends React.Component<{
                     </Button>
                   </Button.Group>
                 </Table.Cell>
-              </Table.Row>)
+              </Table.Row>);
             })}
 
           </Table.Body>

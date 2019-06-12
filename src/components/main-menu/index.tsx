@@ -10,7 +10,6 @@ interface Props {
   router?: NewRouterStore;
 }
 
-
 @inject('mainMenu', 'router')
 @observer
 export default class MainMenu extends React.Component<Props> {

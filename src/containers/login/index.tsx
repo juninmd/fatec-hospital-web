@@ -23,7 +23,6 @@ interface Props {
   history: any;
 }
 
-
 @inject('mainMenu', 'router', 'login')
 @observer
 export default class Login extends React.Component<Props> {
@@ -63,7 +62,6 @@ export default class Login extends React.Component<Props> {
     return (
       <section className='login'>
         <Divider hidden={true} />
-
 
         <Form size='large' onSubmit={this.handleSubmit}>
           <Header as='h2' color='yellow' textAlign='center' content='Login' />

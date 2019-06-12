@@ -1,4 +1,4 @@
-import { configureScope, init } from '@sentry/browser';
+import { init } from '@sentry/browser';
 (() => {
 
   // Desativa o plugin em localhost
@@ -12,7 +12,5 @@ import { configureScope, init } from '@sentry/browser';
   }
 
   init({ dsn: REACT_APP_SENTRY_DSN, release: REACT_APP_VERSION, environment: REACT_APP_NODE_ENV });
-  configureScope(scope => {
-  });
 
 })();
