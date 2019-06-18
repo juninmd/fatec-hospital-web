@@ -49,8 +49,8 @@ export default class MedicoList extends React.Component<{
           <Table.Header>
             <Table.Row>
               <Table.HeaderCell width='1'>Id</Table.HeaderCell>
-              <Table.HeaderCell>E-mail</Table.HeaderCell>
               <Table.HeaderCell>Nome</Table.HeaderCell>
+              <Table.HeaderCell>CRM</Table.HeaderCell>
               <Table.HeaderCell width='1'>Ações</Table.HeaderCell>
             </Table.Row>
           </Table.Header>
@@ -58,15 +58,15 @@ export default class MedicoList extends React.Component<{
           <Table.Body>
             {records.map((e, index) => {
               return (<Table.Row key={index}>
-                <Table.Cell>{e.codigo}</Table.Cell>
-                <Table.Cell>{e.email}</Table.Cell>
-                <Table.Cell>{e.nome}</Table.Cell>
+                <Table.Cell>{e.med_codigo}</Table.Cell>
+                <Table.Cell>{e.med_nome}</Table.Cell>
+                <Table.Cell>{e.med_crm}</Table.Cell>
                 <Table.Cell>
                   <Button.Group>
-                    <Button onClick={() => { this.update(e.codigo); }} icon={true} primary={true} size='small'>
+                    <Button onClick={() => { this.update(e.med_codigo); }} icon={true} primary={true} size='small'>
                       <Icon name='edit' />
                     </Button>
-                    <Button negative={true} onClick={() => { remove(e.codigo); }} icon={true} primary={true} size='small'>
+                    <Button negative={true} onClick={() => { remove(e.med_codigo); }} icon={true} primary={true} size='small'>
                       <Icon name='trash' />
                     </Button>
                   </Button.Group>

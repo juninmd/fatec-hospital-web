@@ -1,6 +1,6 @@
 import * as React from 'react';
 import MenuStore from '../../components/main-menu/store';
-import { Container, Grid, Header, Button, Segment, Form, Input } from 'semantic-ui-react';
+import { Container, Grid, Header, Button, Segment, Form, Input, Select } from 'semantic-ui-react';
 import { inject, observer } from 'mobx-react';
 import NewRouterStore from '../../mobx/router.store';
 import MedicoStore from './store';
@@ -23,13 +23,16 @@ export default class Medico extends React.Component<RouteComponentProps<{ id: st
   handleSubmit = async (e: any) => {
     e.preventDefault();
     const { handleSubmit } = this.props.medico;
-    await handleSubmit();
-    this.list();
+    const success = await handleSubmit();
+    if (success) {
+      this.list();
+    }
   }
 
   async componentDidMount() {
-    const { buildRecords, reset } = this.props.medico;
+    const { buildRecords, buildLists, reset } = this.props.medico;
 
+    await buildLists();
     const id = Number(this.props.match.params.id);
     if (id) {
       await buildRecords(id);
@@ -41,7 +44,8 @@ export default class Medico extends React.Component<RouteComponentProps<{ id: st
 
   render() {
 
-    const { med_nome } = this.props.medico.records;
+    const { med_nome, med_crm, esp_codigo, hos_codigo } = this.props.medico.records;
+    const { hospitalOptions, especialidadeOptions } = this.props.medico;
     const { handleForm } = this.props.medico;
 
     return (
@@ -64,6 +68,20 @@ export default class Medico extends React.Component<RouteComponentProps<{ id: st
             <Form.Field required={true}>
               <label>Nome:</label>
               <Input type='text' id='med_nome' required={true} value={med_nome} onChange={handleForm} />
+            </Form.Field>
+
+            <Form.Field required={true}>
+              <label>CRM:</label>
+              <Input type='number' id='med_crm' required={true} value={med_crm} onChange={handleForm} />
+            </Form.Field>
+
+            <Form.Field required={true}>
+              <label>Hospital:</label>
+              <Select placeholder='Selecione o hospital' id='hos_codigo' value={hos_codigo} onChange={handleForm} options={hospitalOptions} /></Form.Field>
+
+            <Form.Field required={true}>
+              <label>Especialidade:</label>
+              <Select placeholder='Selecione a especialidade' id='esp_codigo' value={esp_codigo} onChange={handleForm} options={especialidadeOptions} />
             </Form.Field>
 
             <Button positive={true} type='submit'>Enviar</Button>
