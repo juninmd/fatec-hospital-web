@@ -10,7 +10,7 @@ export const getHospitais = (params?: any) => {
 };
 
 export const postHospitais = (data: any) => {
-  data.codigo = null;
+  data.hos_codigo = null;
   return axios.request({ method: 'post', baseURL: backend, url: `/hospitais`, data });
 };
 

@@ -1,5 +1,5 @@
 import { action, observable } from 'mobx';
-import { getEspecialidades, deleteEspecialidades } from '../../api/hospitais.api';
+import { getEspecialidades, deleteEspecialidades } from '../../api/especialidades.api';
 
 export default class EspecialidadeListStore {
   @observable records: any[] = [];

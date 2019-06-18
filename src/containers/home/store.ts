@@ -1,12 +1,10 @@
 import { action, observable } from 'mobx';
-import { getPoemas } from '../../api/hospitais.api';
 
 export default class HomeStore {
   @observable records: any[] = [];
 
   @action buildRecords = async () => {
-    const { data } = await getPoemas();
-    this.records = data;
+    this.records = [];
   }
 
 }

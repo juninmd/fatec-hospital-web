@@ -9,26 +9,26 @@ import { RouteComponentProps } from 'react-router-dom';
 interface Props {
   menu: MenuStore;
   router: NewRouterStore;
-  poema: MedicoStore;
+  medico: MedicoStore;
 }
-@inject('mainMenu', 'router', 'poema', 'match')
+@inject('mainMenu', 'router', 'medico', 'match')
 @observer
 export default class Medico extends React.Component<RouteComponentProps<{ id: string }> & Props> {
 
   list = () => {
     const { setHistory } = this.props.router;
-    setHistory(`poema-list`);
+    setHistory(`medico-list`);
   };
 
   handleSubmit = async (e: any) => {
     e.preventDefault();
-    const { handleSubmit } = this.props.poema;
+    const { handleSubmit } = this.props.medico;
     await handleSubmit();
     this.list();
   }
 
   async componentDidMount() {
-    const { buildRecords, reset } = this.props.poema;
+    const { buildRecords, reset } = this.props.medico;
 
     const id = Number(this.props.match.params.id);
     if (id) {
@@ -41,8 +41,8 @@ export default class Medico extends React.Component<RouteComponentProps<{ id: st
 
   render() {
 
-    const { titulo, corpo } = this.props.poema.records;
-    const { handleForm } = this.props.poema;
+    const { med_nome } = this.props.medico.records;
+    const { handleForm } = this.props.medico;
 
     return (
       <Container>
@@ -62,13 +62,10 @@ export default class Medico extends React.Component<RouteComponentProps<{ id: st
         <Segment>
           <Form onSubmit={this.handleSubmit}>
             <Form.Field required={true}>
-              <label>Titulo:</label>
-              <Input type='text' id='titulo' required={true} value={titulo} onChange={handleForm} />
+              <label>Nome:</label>
+              <Input type='text' id='med_nome' required={true} value={med_nome} onChange={handleForm} />
             </Form.Field>
-            <Form.Field required={true}>
-              <label>Corpo:</label>
-              <textarea value={corpo} id='corpo' required={true} onChange={handleForm} />
-            </Form.Field>
+
             <Button positive={true} type='submit'>Enviar</Button>
             <Button negative={true} onClick={() => this.list()} type='button'>Voltar</Button>
           </Form>

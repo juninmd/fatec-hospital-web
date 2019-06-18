@@ -18,8 +18,8 @@ export default class Home extends React.Component<Props> {
     const { setMenuActive } = this.props.menu;
     setMenuActive(url);
 
-    const { history } = this.props.router;
-    history.push(`${process.env.PUBLIC_URL}/${url}`);
+    const { setHistory } = this.props.router;
+    setHistory(url);
   };
 
   async componentDidMount() {
@@ -38,8 +38,8 @@ export default class Home extends React.Component<Props> {
             <Grid.Column>
               <Header color='blue' as='h2'>
                 <Header.Content>
-                  Últimos Poemas
-                 <Header.Subheader>Acompanhe os 15 melhores</Header.Subheader>
+                 Seja bem vindo
+                 <Header.Subheader>Acesse algum de nossos menus na área superior</Header.Subheader>
                 </Header.Content>
               </Header>
             </Grid.Column>

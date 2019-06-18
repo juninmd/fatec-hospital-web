@@ -2,18 +2,22 @@ import { router } from './router.store';
 import { mainMenu } from '../components/main-menu/store';
 import { login } from '../containers/login/store';
 import { home } from '../containers/home/store';
-import { poema } from '../containers/poema/store';
-import { poemaList } from '../containers/poema-list/store';
-import { usuario } from '../containers/usuario/store';
-import { usuarioList } from '../containers/usuario-list/store';
+import { medico } from '../containers/medico/store';
+import { medicoList } from '../containers/medico-list/store';
+import { especialidade } from '../containers/especialidade/store';
+import { especialidadeList } from '../containers/especialidade-list/store';
+import { hospital } from '../containers/hospital/store';
+import { hospitalList } from '../containers/hospital-list/store';
 
 export {
   router,
   mainMenu,
   login,
   home,
-  poema,
-  poemaList,
-  usuario,
-  usuarioList
+  medico,
+  medicoList,
+  especialidade,
+  especialidadeList,
+  hospital,
+  hospitalList
 };

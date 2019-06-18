@@ -1,7 +1,7 @@
 import swal from 'sweetalert2';
 import { action, observable } from 'mobx';
 import { assign } from '../../util/object.util';
-import { postLogin } from '../../api/especialidades.api';
+import { postLogin } from '../../api/user.api';
 import { setAuth } from '../../util/auth.util';
 
 export default class LoginStore {

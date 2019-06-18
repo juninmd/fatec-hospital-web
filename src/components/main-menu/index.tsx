@@ -14,9 +14,9 @@ interface Props {
 @observer
 export default class MainMenu extends React.Component<Props> {
 
-  handleItemClick = (name: any, { url }: any) => {
+  handleItemClick = (_name: any, { url }: any) => {
     const { setMenuActive } = this.props.mainMenu!;
-    setMenuActive(name);
+    setMenuActive(url);
 
     const { setHistory } = this.props.router!;
     return setHistory(url);
@@ -36,25 +36,28 @@ export default class MainMenu extends React.Component<Props> {
         <div className={'nav'}>
           <Menu color={'blue'} inverted={true} size='large' secondary={true} stackable={true}>
             <Menu.Item
-              name='home'
               active={activated === 'home'}
               url='home'
               onClick={this.handleItemClick}>
               Home
             </Menu.Item>
             <Menu.Item
-              name='poema'
-              active={activated === 'poema'}
-              url='poema-list'
+              active={activated === 'hospital-list'}
+              url='hospital-list'
               onClick={this.handleItemClick}>
-              Poema
+              Hospital
             </Menu.Item>
             <Menu.Item
-              name='usuario'
-              active={activated === 'usuario'}
-              url='usuario-list'
+              active={activated === 'especialidade-list'}
+              url='especialidade-list'
               onClick={this.handleItemClick}>
-              Usuários
+              Especialidade
+            </Menu.Item>
+            <Menu.Item
+              active={activated === 'medico-list'}
+              url='medico-list'
+              onClick={this.handleItemClick}>
+              Medico
             </Menu.Item>
             <Menu.Menu position='right'>
               <Dropdown item={true} text={getFirstName()}>

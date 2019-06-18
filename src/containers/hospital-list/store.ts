@@ -1,19 +1,19 @@
 import { action, observable } from 'mobx';
-import { getUsuarios, deleteUsuarios } from '../../api/especialidades.api';
+import { getHospitais, deleteHospitais } from '../../api/hospitais.api';
 
-export default class UsuarioListStore {
+export default class HospitalListStore {
   @observable records: any[] = [];
 
   @action buildRecords = async () => {
-    const { data } = await getUsuarios();
+    const { data } = await getHospitais();
     this.records = data;
   }
 
   @action remove = async (id: number) => {
-    await deleteUsuarios(id);
+    await deleteHospitais(id);
     await this.buildRecords();
   }
 
 }
-const usuarioList = new UsuarioListStore();
-export { usuarioList };
+const hospitalList = new HospitalListStore();
+export { hospitalList };

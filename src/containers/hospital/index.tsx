@@ -9,26 +9,26 @@ import { RouteComponentProps } from 'react-router-dom';
 interface Props {
   menu: MenuStore;
   router: NewRouterStore;
-  usuario: UsuarioStore;
+  hospital: UsuarioStore;
 }
-@inject('mainMenu', 'router', 'usuario', 'match')
+@inject('mainMenu', 'router', 'hospital', 'match')
 @observer
 export default class Usuario extends React.Component<RouteComponentProps<{ id: string }> & Props> {
 
   list = () => {
     const { setHistory } = this.props.router;
-    setHistory(`usuario-list`);
+    setHistory(`hospital-list`);
   };
 
   handleSubmit = async (e: any) => {
     e.preventDefault();
-    const { handleSubmit } = this.props.usuario;
+    const { handleSubmit } = this.props.hospital;
     await handleSubmit();
     this.list();
   }
 
   async componentDidMount() {
-    const { buildRecords, reset } = this.props.usuario;
+    const { buildRecords, reset } = this.props.hospital;
 
     const id = Number(this.props.match.params.id);
     if (id) {
@@ -41,8 +41,8 @@ export default class Usuario extends React.Component<RouteComponentProps<{ id: s
 
   render() {
 
-    const { email, nome, senha } = this.props.usuario.records;
-    const { handleForm } = this.props.usuario;
+    const { hos_nome, hos_endereco, hos_telefone, hos_cnpj } = this.props.hospital.records;
+    const { handleForm } = this.props.hospital;
 
     return (
       <Container>
@@ -51,7 +51,7 @@ export default class Usuario extends React.Component<RouteComponentProps<{ id: s
             <Grid.Column>
               <Header color='blue' as='h2'>
                 <Header.Content>
-                  Cadastro de usuarios
+                  Cadastro de hospitais
                  <Header.Subheader>Cadastre / Edite</Header.Subheader>
                 </Header.Content>
               </Header>
@@ -62,18 +62,23 @@ export default class Usuario extends React.Component<RouteComponentProps<{ id: s
         <Segment>
           <Form onSubmit={this.handleSubmit}>
             <Form.Field required={true}>
-              <label>E-mail:</label>
-              <Input type='text' id='email' required={true} value={email} onChange={handleForm} />
-            </Form.Field>
-
-            <Form.Field required={true}>
               <label>Nome:</label>
-              <Input type='text' id='nome' required={true} value={nome} onChange={handleForm} />
+              <Input type='text' id='hos_nome' required={true} value={hos_nome} onChange={handleForm} />
             </Form.Field>
 
             <Form.Field required={true}>
-              <label>Senha:</label>
-              <Input type='password' id='senha' required={true} value={senha} onChange={handleForm} />
+              <label>Endereço:</label>
+              <Input type='text' id='hos_endereco' required={true} value={hos_endereco} onChange={handleForm} />
+            </Form.Field>
+
+            <Form.Field required={true}>
+              <label>Telefone:</label>
+              <Input type='text' id='hos_telefone' required={true} value={hos_telefone} onChange={handleForm} />
+            </Form.Field>
+
+            <Form.Field required={true}>
+              <label>CNPJ:</label>
+              <Input type='text' id='hos_cnpj' required={true} value={hos_cnpj} onChange={handleForm} />
             </Form.Field>
 
             <Button positive={true} type='submit'>Enviar</Button>

@@ -6,13 +6,13 @@ export const isLoggedIn = () => {
 };
 
 interface UserData {
-  codigo: number;
-  nome: string;
-  email: string;
+  usu_codigo: number;
+  usu_nome: string;
+  usu_email: string;
 }
 
 export const getFirstName = (): string => {
-  const user = getUser().nome.split(' ')[0];
+  const user = getUser().usu_nome.split(' ')[0];
   return user.charAt(0).toUpperCase() + user.slice(1).toLowerCase();
 };
 

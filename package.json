@@ -17,8 +17,7 @@
     "react-scripts": "3.0.0",
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^0.85.0",
-    "sweetalert2": "^7.33.1",
-    "typescript": "3.4.5"
+    "sweetalert2": "^7.33.1"
   },
   "devDependencies": {
     "@types/history": "^4.7.2",
@@ -33,7 +32,7 @@
     "tslint-config-prettier": "^1.18.0",
     "tslint-config-standard": "^8.0.1",
     "tslint-react": "^4.0.0",
-    "typescript": "^3.4.5"
+    "typescript": "^3.5.0"
   },
   "scripts": {
     "start": "react-scripts start",

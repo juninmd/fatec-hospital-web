@@ -10,21 +10,21 @@ import MedicoListStore from './store';
 export default class MedicoList extends React.Component<{
   menu: MenuStore;
   router: NewRouterStore;
-  usuarioList: MedicoListStore;
+  medicoList: MedicoListStore;
 }> {
   update = (id: number) => {
     const { setHistory } = this.props.router;
-    setHistory(`usuario/${id}`);
+    setHistory(`medico/${id}`);
   };
 
   async componentDidMount() {
-    const { buildRecords } = this.props.usuarioList;
+    const { buildRecords } = this.props.medicoList;
     await buildRecords();
   }
 
   render() {
 
-    const { records, remove } = this.props.usuarioList;
+    const { records, remove } = this.props.medicoList;
 
     return (
       <Container>
@@ -33,7 +33,7 @@ export default class MedicoList extends React.Component<{
             <Grid.Column>
               <Header color='blue' as='h2'>
                 <Header.Content>
-                  Cadastro de usuarios
+                  Cadastro de Medicos
                  <Header.Subheader>Cadastre / Edite</Header.Subheader>
                 </Header.Content>
               </Header>

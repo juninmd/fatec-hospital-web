@@ -10,6 +10,7 @@ export const getEspecialidadesById = (id: any) => {
 };
 
 export const postEspecialidades = (data: any) => {
+  data.esp_codigo = null;
   return axios.request({ method: 'post', baseURL: backend, url: `/especialidades`, data });
 };
 

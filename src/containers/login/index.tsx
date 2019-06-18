@@ -64,7 +64,9 @@ export default class Login extends React.Component<Props> {
         <Divider hidden={true} />
 
         <Form size='large' onSubmit={this.handleSubmit}>
-          <Header as='h2' color='yellow' textAlign='center' content='Login' />
+          <Segment stacked={true} size='small' raised={true} >
+            <Header as='h3' color='black' textAlign='center' content='Gestão de Hospitais' />
+          </Segment>
 
           <Grid textAlign='center' style={{ height: '100%' }} verticalAlign='middle'>
             <Grid.Column width='4'>

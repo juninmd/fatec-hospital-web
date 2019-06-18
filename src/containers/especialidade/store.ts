@@ -1,19 +1,13 @@
 import { action, observable } from 'mobx';
-import { getEspecialidadesById, postEspecialidades, putEspecialidades } from '../../api/hospitais.api';
-import { getUser } from '../../util/auth.util';
+import { getEspecialidadesById, postEspecialidades, putEspecialidades } from '../../api/especialidades.api';
 
 export default class EspecialidadeStore {
-  @observable records: {
-    codigo: string,
-    titulo: string,
-    corpo: string,
-    codigo_usuario: string
-  } = {
-      codigo: '',
-      titulo: '',
-      corpo: '',
-      codigo_usuario: getUser().codigo.toString()
-    };
+  private baseRecords = {
+    esp_codigo: '',
+    esp_nome: ''
+  };
+
+  @observable records: any = { ...this.baseRecords };
 
   @action buildRecords = async (id: number) => {
     const { data: [records] } = await getEspecialidadesById(id);
@@ -21,12 +15,7 @@ export default class EspecialidadeStore {
   }
 
   @action reset = () => {
-    this.records = {
-      codigo: '',
-      titulo: '',
-      corpo: '',
-      codigo_usuario: getUser().codigo.toString()
-    };
+    this.records = { ...this.baseRecords };
   }
 
   @action handleForm = (event: any, select?: any) => {
@@ -36,8 +25,8 @@ export default class EspecialidadeStore {
 
   @action handleSubmit = async () => {
 
-    if (Number(this.records.codigo)) {
-      await putEspecialidades(+this.records.codigo, this.records);
+    if (Number(this.records.esp_codigo)) {
+      await putEspecialidades(+this.records.esp_codigo, this.records);
     }
     else {
       await postEspecialidades(this.records);

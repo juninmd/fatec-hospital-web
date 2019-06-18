@@ -5,26 +5,26 @@ import { inject, observer } from 'mobx-react';
 import NewRouterStore from '../../mobx/router.store';
 import UsuarioListStore from './store';
 
-@inject('mainMenu', 'router', 'usuarioList')
+@inject('mainMenu', 'router', 'hospitalList')
 @observer
 export default class UsuarioList extends React.Component<{
   menu: MenuStore;
   router: NewRouterStore;
-  usuarioList: UsuarioListStore;
+  hospitalList: UsuarioListStore;
 }> {
   update = (id: number) => {
     const { setHistory } = this.props.router;
-    setHistory(`usuario/${id}`);
+    setHistory(`hospital/${id}`);
   };
 
   async componentDidMount() {
-    const { buildRecords } = this.props.usuarioList;
+    const { buildRecords } = this.props.hospitalList;
     await buildRecords();
   }
 
   render() {
 
-    const { records, remove } = this.props.usuarioList;
+    const { records, remove } = this.props.hospitalList;
 
     return (
       <Container>
@@ -33,7 +33,7 @@ export default class UsuarioList extends React.Component<{
             <Grid.Column>
               <Header color='blue' as='h2'>
                 <Header.Content>
-                  Cadastro de usuarios
+                  Cadastro de hospitais
                  <Header.Subheader>Cadastre / Edite</Header.Subheader>
                 </Header.Content>
               </Header>
@@ -49,8 +49,8 @@ export default class UsuarioList extends React.Component<{
           <Table.Header>
             <Table.Row>
               <Table.HeaderCell width='1'>Id</Table.HeaderCell>
-              <Table.HeaderCell>E-mail</Table.HeaderCell>
               <Table.HeaderCell>Nome</Table.HeaderCell>
+              <Table.HeaderCell>CNPJ</Table.HeaderCell>
               <Table.HeaderCell width='1'>Ações</Table.HeaderCell>
             </Table.Row>
           </Table.Header>
@@ -58,15 +58,15 @@ export default class UsuarioList extends React.Component<{
           <Table.Body>
             {records.map((e, index) => {
               return (<Table.Row key={index}>
-                <Table.Cell>{e.codigo}</Table.Cell>
-                <Table.Cell>{e.email}</Table.Cell>
-                <Table.Cell>{e.nome}</Table.Cell>
+                <Table.Cell>{e.hos_codigo}</Table.Cell>
+                <Table.Cell>{e.hos_nome}</Table.Cell>
+                <Table.Cell>{e.hos_cnpj}</Table.Cell>
                 <Table.Cell>
                   <Button.Group>
-                    <Button onClick={() => { this.update(e.codigo); }} icon={true} primary={true} size='small'>
+                    <Button onClick={() => { this.update(e.hos_codigo); }} icon={true} primary={true} size='small'>
                       <Icon name='edit' />
                     </Button>
-                    <Button negative={true} onClick={() => { remove(e.codigo); }} icon={true} primary={true} size='small'>
+                    <Button negative={true} onClick={() => { remove(e.hos_codigo); }} icon={true} primary={true} size='small'>
                       <Icon name='trash' />
                     </Button>
                   </Button.Group>

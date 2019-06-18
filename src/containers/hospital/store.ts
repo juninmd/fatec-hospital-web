@@ -1,18 +1,17 @@
 import { action, observable } from 'mobx';
-import { getHospitaisById, postHospitais, putHospitais } from '../../api/especialidades.api';
+import { getHospitaisById, postHospitais, putHospitais } from '../../api/hospitais.api';
 
-export default class Hospitaistore {
-  @observable records: {
-    codigo: string,
-    email: string,
-    nome: string,
-    senha: string
-  } = {
-      codigo: '',
-      email: '',
-      nome: '',
-      senha: ''
-    };
+export default class HospitalStore {
+
+  private baseRecords = {
+    hos_codigo: '',
+    hos_nome: '',
+    hos_endereco: '',
+    hos_telefone: '',
+    hos_cnpj: ''
+  };
+
+  @observable records: any = { ...this.baseRecords };
 
   @action buildRecords = async (id: number) => {
     const { data: [records] } = await getHospitaisById(id);
@@ -20,12 +19,7 @@ export default class Hospitaistore {
   }
 
   @action reset = () => {
-    this.records = {
-      codigo: '',
-      email: '',
-      nome: '',
-      senha: ''
-    };
+    this.records = { ...this.baseRecords };
   }
 
   @action handleForm = (event: any, select?: any) => {
@@ -35,8 +29,8 @@ export default class Hospitaistore {
 
   @action handleSubmit = async () => {
 
-    if (Number(this.records.codigo)) {
-      await putHospitais(+this.records.codigo, this.records);
+    if (Number(this.records.hos_codigo)) {
+      await putHospitais(+this.records.hos_codigo, this.records);
     }
     else {
       await postHospitais(this.records);
